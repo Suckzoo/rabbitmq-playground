@@ -8,9 +8,9 @@ def callback(ch, method, properties, body):
 # queue_declare is idempotent: call as many time as you want!
 # result is always same: only one queue will be there for you.
 channel.queue_declare(queue='hello')
-# routing_key parameter means queue's name declared before.
+# receiver uses queue parameter instead of routing_key.
 channel.basic_consume(callback,
-                      routing_key='hello',  
+                      queue='hello',  
                       no_ack=True)
 print 'Start consuming...(Press ^C to stop)'
 channel.start_consuming()
